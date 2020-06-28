@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Oplab_Challenge
 {
@@ -6,25 +7,20 @@ namespace Oplab_Challenge
     {
         static void Main(string[] args)
         {
-            //Bubble Sort
-            int[] array = {9, 5, 2, 6, 10, 8, 7, 1, 4, 3};
+            //Linklist
+            LinkedList<string> months = new LinkedList<string>();
 
-            for (int i = 0; i < array.Length - 1; i++)
-            {
-                for (int j = 0; j < array.Length - 1; j++)
-                {
-                    if (array[j] > array[j + 1])
-                    {
-                        int temp = array[j];
-                        array[j] = array[j + 1];
-                        array[j + 1] = temp;
-                    }
-                }
-            }
+            months.AddFirst("January");
+            months.AddLast("March");
 
-            foreach (int num in array)
+            LinkedListNode<string> node = months.FindLast("March");
+
+            months.AddBefore(node, "February");
+            months.AddAfter(node, "April");
+
+            foreach (string list in months)
             {
-                Console.WriteLine(num);
+                Console.WriteLine(list);
             }
         }
     }
