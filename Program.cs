@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System.IO;
+using System;
 
 namespace Oplab_Challenge
 {
@@ -7,20 +8,32 @@ namespace Oplab_Challenge
     {
         static void Main(string[] args)
         {
-            //Linklist
-            LinkedList<string> months = new LinkedList<string>();
+            TextWriter textWriter = new StreamWriter("C:\\Users\\LuanRupert\\source\\repos\\Oplab Challenge\\GameOfStone.txt");
 
-            months.AddFirst("January");
-            months.AddLast("March");
+            int t = Convert.ToInt32(Console.ReadLine());
 
-            LinkedListNode<string> node = months.FindLast("March");
-
-            months.AddBefore(node, "February");
-            months.AddAfter(node, "April");
-
-            foreach (string list in months)
+            for (int tItr = 0; tItr < t; tItr++)
             {
-                Console.WriteLine(list);
+                int n = Convert.ToInt32(Console.ReadLine());
+
+                string result = gameOfStones(n);
+
+                textWriter.WriteLine(result);
+            }
+
+            textWriter.Flush();
+            textWriter.Close();
+        }
+
+        static string gameOfStones(int n)
+        {
+            if (n % 7 == 0 || n % 7 == 1)
+            {
+                return "Second";
+            }
+            else
+            {
+                return "First";
             }
         }
     }
