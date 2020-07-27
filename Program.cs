@@ -1,6 +1,8 @@
-﻿
-using System.IO;
-using System;
+﻿using System;
+using System.Linq;
+using Tweetinvi;
+using Tweetinvi.Models;
+using Tweetinvi.Parameters;
 
 namespace Oplab_Challenge
 {
@@ -8,32 +10,28 @@ namespace Oplab_Challenge
     {
         static void Main(string[] args)
         {
-            TextWriter textWriter = new StreamWriter("C:\\Users\\LuanRupert\\source\\repos\\Oplab Challenge\\GameOfStone.txt");
+            Console.Write("Write a word to search for tweets:");
+            string search = Console.ReadLine();
+            Console.WriteLine();
+            Auth.SetUserCredentials("5BZmdJoR1y6XvTv9yUZ65t0qV", "TGZoRvV82wWFO6Sf4Hv40dQTavg3nnQLuHKMxA9QZmRCtr1HVX",
+                                                "81419467-QmwU8wIkVUtyoFptDG0f0j6YA1zVjtL2Zt0Albn08", "tBCe7qliVUuVFzrnvTMPnNGtKWdsaSyXPpnpteCUYYgZK");
+            //var user = User.GetAuthenticatedUser();
 
-            int t = Convert.ToInt32(Console.ReadLine());
+            //Tweet.PublishTweet("I am learning webAPI with C#");
 
-            for (int tItr = 0; tItr < t; tItr++)
+            var searchParameter = new SearchTweetsParameters(search)
             {
-                int n = Convert.ToInt32(Console.ReadLine());
+                SearchType = SearchResultType.Recent,
+                MaximumNumberOfResults = 10
+            };
 
-                string result = gameOfStones(n);
+            var tweets = Search.SearchTweets(searchParameter).ToArray();
 
-                textWriter.WriteLine(result);
-            }
-
-            textWriter.Flush();
-            textWriter.Close();
-        }
-
-        static string gameOfStones(int n)
-        {
-            if (n % 7 == 0 || n % 7 == 1)
+            foreach (var list in tweets)
             {
-                return "Second";
-            }
-            else
-            {
-                return "First";
+                Console.WriteLine(list.Text);
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine();
             }
         }
     }

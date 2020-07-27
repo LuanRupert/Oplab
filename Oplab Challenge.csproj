@@ -6,4 +6,8 @@
     <RootNamespace>Oplab_Challenge</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TweetinviAPI" Version="4.0.3" />
+  </ItemGroup>
+
 </Project>
